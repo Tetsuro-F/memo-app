@@ -1,0 +1,484 @@
+body {
+    /* margin:0; */
+    /* padding:0; */
+    font-family: sans-serif;
+    background: linear-gradient(135deg, #f7efe5 0%, #f1d2b6 50%, #e8b98a 100%);
+    /* ベージュ → 薄オレンジ → 秋色オレンジ */
+    background-attachment: fixed;
+    position: relative;
+    /* ★ 背景レイヤーの基準を作る */
+    /* z-index: 1;  */
+}
+
+header {
+    background: #b5651d;
+    color: #fff;
+    border-bottom: none;
+    text-align: center;
+    padding: 10px 0;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 30px;
+}
+
+/* .tab-buttons{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display:flex;
+    justify-content: center;
+    gap: 60px;
+    padding: 20px 0;
+    transition: top 0.6s ease, transform 0.6s ease;
+} */
+
+/* .tab-buttons.top{
+    position: static;
+    left: 50%;
+    transform: none;
+    margin-top: 0;
+    padding: 20px 0;
+    border-bottom:1px solid #ccc;
+} */
+
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 100PX;
+    padding: 20PX 0;
+    /* border-bottom:1px solid #ccc; */
+}
+
+.tab-buttons button {
+    width: 120px;
+    height: 120px;
+    /* ★ 円にする */
+    padding: 0;
+    font-size: 22px;
+    border: none;
+    background: #d98c3b;
+    /* 秋色オレンジ */
+    cursor: pointer;
+    border-radius: 50%;
+    /* ★ 完全な円 */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    font-weight: bold;
+    transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* ★ ホバーアニメーション */
+.tab-buttons button:hover {
+    transform: translateY(-6px) scale(1.05);
+    background: #b5651d;
+    /* 濃い秋色ブラウン */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+}
+
+.tab-buttons button:last-child {
+    border-right: none;
+}
+
+.tab-buttons button.active {
+    background: #b5651d;
+    /* 秋色ブラウン */
+    color: #fff;
+}
+
+main {
+    padding: 15px;
+}
+
+section {
+    display: none;
+    background: #fff;
+    padding: 15px;
+    border-radius: 4px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    font-size: 20px;
+    border-left: 4px solid #d98c3b;
+    /* 秋色オレンジ */
+    padding-left: 8px;
+}
+
+.note {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* 当時の写真一覧 */
+.photo-list {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.photo-list img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.photo-list img:hover {
+    transform: scale(1.05);
+}
+
+/* 選択された写真 */
+.photo-list img.selected,
+.search-old-photo.selected {
+    border: 4px solid #d98c3b;
+}
+
+#clearOldPhotoBtn {
+    margin-top: 10px;
+}
+
+
+#detailArea {
+    display: none;
+    margin-top: 15px;
+}
+
+
+.form-row {
+    margin-bottom: 10px;
+}
+
+.form-row label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.form-row input[type="text"],
+.form-row select {
+    width: 30%;
+    padding: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.form-row input[type="file"] {
+    font-size: 15px;
+}
+
+.photo-preview {
+    margin-top: 10px;
+}
+
+.photo-preview img {
+    max-width: 150px;
+    max-height: 150px;
+    border: 1px solid #ccc;
+    object-fit: cover;
+}
+
+#changeCurrentPhotoBtn {
+    margin-top: 10px;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #b5651d;
+    /* 秋色ブラウン */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 25px;
+    /* ★ 丸みを強く */
+    font-size: 16px;
+    margin-top: 10px;
+    transition: 0.2s;
+}
+
+.btn:hover {
+    background: #8c4a14;
+    /* 濃いブラウン */
+}
+
+.btn-gray {
+    background: #999;
+}
+
+.search-old-photo.selected {
+    border: 4px solid #0066cc;
+}
+
+.result-card {
+    margin-top: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    display: flex;
+    gap: 10px;
+}
+
+.result-card .photos {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.result-card .photos img {
+    max-width: 120px;
+    max-height: 120px;
+    border: 1px solid #ccc;
+    object-fit: cover;
+}
+
+.result-card .info p {
+    margin: 4px 0;
+}
+
+/* 6枚になっても折り返して表示 */
+.photo-list {
+    flex-wrap: wrap;
+}
+
+/* ★ 楓が舞うアニメーション背景 */
+.falling-leaves {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: -1;
+}
+
+/* ★ 楓の基本スタイル */
+.leaf {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url(/img/leaf4.png);
+    /* ← 先頭の / は絶対に付けない */
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+
+    animation: wind 4s ease-in-out infinite;
+}
+
+/* ▼ 落下＋回転パターンA */
+@keyframes fallA {
+    0% {
+        transform: translate(0, -10vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50vw, 110vh) rotateX(720deg) rotateY(180deg) rotateZ(360deg);
+        opacity: 0.3;
+    }
+}
+
+/* ▼ 落下＋回転パターンB */
+@keyframes fallB {
+    0% {
+        transform: translate(0, -10vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50vw, 110vh) rotateX(180deg) rotateY(720deg) rotateZ(540deg);
+        opacity: 0.3;
+    }
+}
+
+/* ▼ 落下＋回転パターンC */
+@keyframes fallC {
+    0% {
+        transform: translate(0, -10vh) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50vw, 110vh) rotateX(540deg) rotateY(540deg) rotateZ(720deg);
+        opacity: 0.3;
+    }
+}
+
+.leaf.rotateA {
+    animation:
+        fallA 12s linear infinite,
+        wind 4s ease-in-out infinite;
+}
+
+.leaf.rotateB {
+    animation:
+        fallB 12s linear infinite,
+        wind 4s ease-in-out infinite;
+}
+
+.leaf.rotateC {
+    animation:
+        fallC 12s linear infinite,
+        wind 4s ease-in-out infinite;
+}
+
+@keyframes wind {
+    0%   { margin-left: 0px;   margin-top: 0px; }
+    25%  { margin-left: 20px;  margin-top: -5px; }
+    50%  { margin-left: -10px; margin-top: 5px; }
+    75%  { margin-left: 15px;  margin-top: -3px; }
+    100% { margin-left: 0px;   margin-top: 0px; }
+}
+
+/* ============================
+   スマホ対応（幅600px以下）
+============================ */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 16px;
+    }
+
+    header h1 {
+        font-size: 22px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    section {
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+
+    /* タブボタンをスマホ向けに調整 */
+    .tab-buttons {
+        flex-direction: row;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .tab-buttons button {
+        width: 100px;
+        /* スマホ用に少し小さめの円 */
+        height: 100px;
+        font-size: 18px;
+        padding: 0;
+    }
+
+    /* 当時の写真一覧をスマホサイズに */
+    .photo-list {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .photo-list img {
+        width: 90px;
+        height: 90px;
+    }
+
+    /* 検索用の写真も同じサイズに */
+    .search-old-photo {
+        width: 90px;
+        height: 90px;
+    }
+
+    /* フォームの入力幅を広げる */
+    .form-row input[type="text"],
+    .form-row select {
+        width: 100%;
+        font-size: 16px;
+        padding: 8px;
+    }
+
+    .form-row input[type="file"] {
+        font-size: 14px;
+    }
+
+    /* プレビュー画像を少し小さめに */
+    .photo-preview img {
+        max-width: 140px;
+        max-height: 140px;
+    }
+
+    /* ボタンを横幅いっぱいにして押しやすく */
+    .btn,
+    .btn-gray {
+        width: 100%;
+        max-width: 320px;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+    }
+
+    /* 検索結果カードのレイアウト調整 */
+    .result-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .result-card .photos {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .result-card .photos img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+
+    .btn {
+        display: block;
+        margin: 10px auto;
+        /* ★ 中央寄せ */
+        width: 100%;
+        max-width: 300px;
+    }
+
+}
+
+/* 入力セクション全体を中央寄せにする */
+#section-input {
+    max-width: 1200px;
+    /* ★ 好きな幅に調整（例：1200px） */
+    margin: 0 auto;
+    /* ★ 中央寄せ */
+}
+
+/* 検索セクション全体を中央寄せにする */
+#section-search {
+    max-width: 1200px;
+    /* ★ 好きな幅に調整（例：700px） */
+    margin: 0 auto;
+    /* ★ 中央寄せ */
+}
+
+/* 検索結果エリアの幅を適正に狭める */
+#searchResult {
+    max-width: 500px;
+    /* ★ 好きな幅に調整（例：600px） */
+    margin: 0 auto;
+    /* ★ 中央寄せ */
+}
+
+#footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #b5651d;
+    /* 秋色ブラウン */
+    color: #fff;
+    margin-top: 40px;
+}

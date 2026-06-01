@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>みんなお久しぶり‗同窓会アプリ</title>
+    <!-- jQuery（CDN）-->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- 外部CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <div class="falling-leaves">
+    <div class="leaf rotateA" style="left:5%;  animation-delay:0s;"></div>
+    <div class="leaf rotateB" style="left:15%; animation-delay:2s;"></div>
+    <div class="leaf rotateC" style="left:25%; animation-delay:4s;"></div>
+    <div class="leaf rotateA" style="left:35%; animation-delay:1s;"></div>
+    <div class="leaf rotateB" style="left:45%; animation-delay:3s;"></div>
+    <div class="leaf rotateC" style="left:55%; animation-delay:5s;"></div>
+    <div class="leaf rotateA" style="left:65%; animation-delay:1.5s;"></div>
+    <div class="leaf rotateB" style="left:75%; animation-delay:3.5s;"></div>
+    <div class="leaf rotateC" style="left:85%; animation-delay:0.5s;"></div>
+    <div class="leaf rotateA" style="left:95%; animation-delay:4.5s;"></div>
+</div>
+
+    <header>
+        <h1>Enjoy☆彡同窓会</h1>
+    </header>
+
+    <!-- 入力 / 検索 切り替えボタン -->
+    <div class="tab-buttons">
+        <button id="btn-input" class="active">登録</button>
+        <button id="btn-search">検索</button>
+    </div>
+
+    <main>
+
+        <!-- 入力セクション -->
+        <section id="section-input">
+            <h2>あなたを登録</h2>
+
+            <p class="note">
+                ① 当時の写真を選ぶ → ② 名前とニックネーム入力 → ③ 現在の写真をアップロード → ④ 保存
+            </p>
+
+            <!-- ① 当時の写真を選ぶエリア（ここは最初から表示） -->
+            <h3>当時の写真を選んでください</h3>
+
+            <div id="oldPhotoList" class="photo-list">
+                <img src="/img/boy1.jpg" data-id="1" class="old-photo">
+                <img src="/img/girl1.jpg" data-id="2" class="old-photo">
+                <img src="/img/boy2.jpg" data-id="3" class="old-photo">
+                <img src="/img/girl2.jpg" data-id="4" class="old-photo">
+                <img src="/img/girl3.jpg" data-id="5" class="old-photo">
+                <img src="/img/boy3.jpg" data-id="6" class="old-photo">
+            </div>
+
+            <div class="photo-preview">
+                <span>選択した写真：</span><br>
+                <img id="oldPhotoPreview" src="" style="display:none;">
+            </div>
+
+            <button id="clearOldPhotoBtn" class="btn-gray">選択解除</button>
+
+            <!-- ② 以降の詳細入力エリア-->
+            <div id="detailArea">
+                <div class="form-row">
+                    <label for="nameInput">名前（フルネーム）</label>
+                    <input type="text" id="nameInput" placeholder="例）山田 太郎">
+                </div>
+
+                <div class="form-row">
+                    <label for="nicknameInput">当時のニックネーム</label>
+                    <input type="text" id="nicknameInput" placeholder="例）たろちゃん">
+                </div>
+
+                <div class="form-row">
+                    <label for="currentPhotoInput">現在の写真</label>
+                    <input type="file" id="currentPhotoInput" accept="image/*">
+                </div>
+
+                <div class="photo-preview">
+                    <span>プレビュー：</span><br>
+                    <img id="currentPhotoPreview" src="" style="display:none;">
+                </div>
+
+                <!--編集モード専用：現在の写真を変更するボタン -->
+                <button id="changeCurrentPhotoBtn" class="btn" style="display:none;">
+                    変更
+                </button>
+
+                <button class="btn" id="saveBtn">保存</button>
+            </div>
+        </section>
+
+        <!-- 検索セクション -->
+        <section id="section-search">
+            <h2>あの人を検索</h2>
+
+            <p class="note">
+                当時の写真、名前、ニックネームのいずれかで検索できます。
+            </p>
+
+            <div class="form-row">
+                <label>当時の写真から探す</label>
+
+                <div id="searchOldPhotoList" class="photo-list">
+                    <img src="/img/boy1.jpg" data-id="1" class="search-old-photo">
+                    <img src="/img/girl1.jpg" data-id="2" class="search-old-photo">
+                    <img src="/img/boy2.jpg" data-id="3" class="search-old-photo">
+                    <img src="/img/girl2.jpg" data-id="4" class="search-old-photo">
+                    <img src="/img/girl3.jpg" data-id="5" class="search-old-photo">
+                    <img src="/img/boy3.jpg" data-id="6" class="search-old-photo">
+                </div>
+
+                <!-- 選択解除ボタン（検索用） -->
+                <button id="clearSearchOldPhotoBtn" class="btn-gray">選択解除</button>
+            </div>
+
+            <div class="form-row">
+                <label for="searchNameInput">名前で検索</label>
+                <input type="text" id="searchNameInput">
+            </div>
+
+            <div class="form-row">
+                <label for="searchNicknameInput">ニックネームで検索</label>
+                <input type="text" id="searchNicknameInput">
+            </div>
+
+            <button class="btn" id="searchBtn">検索する</button>
+            <button class="btn btn-gray" id="clearSearchBtn">検索条件クリア</button>
+
+            <div id="searchResult"></div>
+        </section>
+
+    </main>
+
+    <footer id="footer">
+        @Enjoy DOUSOKAI.app
+    </footer>
+
+    <!-- 外部JS -->
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
